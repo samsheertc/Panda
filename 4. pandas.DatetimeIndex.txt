@@ -1,0 +1,354 @@
+class pandas.DatetimeIndex
+(
+data        =None,
+freq        =<no_default>,
+tz          =<no_default>,
+normalize   =<no_default>,
+closed      =<no_default>,
+ambiguous   ='raise',
+dayfirst    =False,
+yearfirst   =False,
+dtype       =None,
+copy        =False,
+name        =None
+)
+
+
+
+pandas.DatetimeIndex.year
+--------------------------
+datetime_series = pd.Series(pd.date_range("2000-01-01", periods=3, freq="YE"))
+datetime_series.dt.year
+
+pandas.DatetimeIndex.month
+--------------------------
+datetime_series = pd.Series(pd.date_range("2000-01-01", periods=3, freq="ME"))
+datetime_series.dt.month
+
+pandas.DatetimeIndex.day
+--------------------------
+datetime_series = pd.Series(pd.date_range("2000-01-01", periods=3, freq="D"))
+datetime_series.dt.day
+
+pandas.DatetimeIndex.hour
+-------------------------
+datetime_series = pd.Series(pd.date_range("2000-01-01", periods=3, freq="h"))
+datetime_series.dt.hour
+
+pandas.DatetimeIndex.minute
+--------------------------
+datetime_series = pd.Series(pd.date_range("2000-01-01", periods=3, freq="min"))
+datetime_series.dt.minute
+
+
+pandas.DatetimeIndex.second
+--------------------------
+datetime_series = pd.Series(pd.date_range("2000-01-01", periods=3, freq="s"))
+datetime_series.dt.second
+
+pandas.DatetimeIndex.microsecond
+-------------------------------
+datetime_series = pd.Series(pd.date_range("2000-01-01", periods=3, freq="us"))
+datetime_series.dt.microsecond
+
+pandas.DatetimeIndex.nanosecond
+-------------------------------
+datetime_series = pd.Series(pd.date_range("2000-01-01", periods=3, freq="ns"))
+datetime_series.dt.nanosecond
+
+pandas.DatetimeIndex.date
+---------------------------
+s = pd.Series(["1/1/2020 10:00:00+00:00", "2/1/2020 11:00:00+00:00"])
+s = pd.to_datetime(s)
+s.dt.date
+
+idx = pd.DatetimeIndex(["1/1/2020 10:00:00+00:00","2/1/2020 11:00:00+00:00"])
+idx.date
+
+pandas.DatetimeIndex.time
+--------------------------
+s = pd.Series(["1/1/2020 10:00:00+00:00", "2/1/2020 11:00:00+00:00"])
+s = pd.to_datetime(s)
+s.dt.time
+
+idx = pd.DatetimeIndex(["1/1/2020 10:00:00+00:00","2/1/2020 11:00:00+00:00"])
+idx.time
+
+pandas.DatetimeIndex.timetz
+--------------------------
+s = pd.Series(["1/1/2020 10:00:00+00:00", "2/1/2020 11:00:00+00:00"])
+s = pd.to_datetime(s)
+s.dt.timetz
+
+
+idx = pd.DatetimeIndex(["1/1/2020 10:00:00+00:00","2/1/2020 11:00:00+00:00"])
+idx.timetz
+
+
+
+pandas.DatetimeIndex.dayofyear
+pandas.DatetimeIndex.day_of_year
+---------------------------------
+s = pd.Series(["1/1/2020 10:00:00+00:00", "2/1/2020 11:00:00+00:00"])
+s = pd.to_datetime(s)
+s.dt.dayofyear
+
+idx = pd.DatetimeIndex(["1/1/2020 10:00:00+00:00","2/1/2020 11:00:00+00:00"])
+idx.dayofyear
+
+pandas.DatetimeIndex.dayofweek
+pandas.DatetimeIndex.day_of_week
+---------------------------------
+The day of the week with Monday=0, Sunday=6.
+
+s = pd.date_range('2016-12-31', '2017-01-08', freq='D').to_series()
+s.dt.dayofweek
+
+pandas.DatetimeIndex.weekday
+-----------------------------
+s = pd.date_range('2016-12-31', '2017-01-08', freq='D').to_series()
+s.dt.dayofweek
+
+
+pandas.DatetimeIndex.quarter
+---------------------------
+s = pd.Series(["1/1/2020 10:00:00+00:00", "4/1/2020 11:00:00+00:00"])
+s = pd.to_datetime(s)
+s.dt.quarter
+
+idx = pd.DatetimeIndex(["1/1/2020 10:00:00+00:00","2/1/2020 11:00:00+00:00"])
+idx.quarter
+
+
+pandas.DatetimeIndex.tz
+--------------------------
+s = pd.Series(["1/1/2020 10:00:00+00:00", "2/1/2020 11:00:00+00:00"])
+s = pd.to_datetime(s)
+s.dt.tz
+
+idx = pd.DatetimeIndex(["1/1/2020 10:00:00+00:00","2/1/2020 11:00:00+00:00"])
+idx.tz
+
+
+pandas.DatetimeIndex.freqstr
+------------------------------
+idx = pd.DatetimeIndex(["1/1/2020 10:00:00+00:00"], freq="D")
+idx.freqstr
+
+idx = pd.DatetimeIndex(["2018-01-01", "2018-01-03", "2018-01-05"],freq="infer")
+idx.freqstr
+
+idx = pd.PeriodIndex(["2023-1", "2023-2", "2023-3"], freq="M")
+idx.freqstr
+
+
+pandas.DatetimeIndex.is_month_start
+pandas.DatetimeIndex.is_month_end
+-------------------------------------
+s = pd.Series(pd.date_range("2018-02-27", periods=3))
+s.dt.is_month_start
+s.dt.is_month_end
+
+idx = pd.date_range("2018-02-27", periods=3)
+idx.is_month_start
+idx.is_month_end
+
+pandas.DatetimeIndex.is_quarter_start
+-------------------------------------
+df = pd.DataFrame({'dates': pd.date_range("2017-03-30",periods=4)})
+df.assign(quarter=df.dates.dt.quarter,is_quarter_start=df.dates.dt.is_quarter_start)
+
+
+idx = pd.date_range('2017-03-30', periods=4)
+idx
+idx.is_quarter_start
+
+pandas.DatetimeIndex.is_quarter_end
+------------------------------------
+df = pd.DataFrame({'dates': pd.date_range("2017-03-30",periods=4)})
+df.assign(quarter=df.dates.dt.quarter,is_quarter_end=df.dates.dt.is_quarter_end)
+
+idx = pd.date_range('2017-03-30', periods=4)
+idx.is_quarter_end
+
+
+
+pandas.DatetimeIndex.is_year_start
+----------------------------------
+dates = pd.Series(pd.date_range("2017-12-30", periods=3))
+dates.dt.is_year_start
+
+idx = pd.date_range("2017-12-30", periods=3)
+idx.is_year_start
+
+pandas.DatetimeIndex.is_year_end
+----------------------------------
+dates = pd.Series(pd.date_range("2017-12-30", periods=3))
+dates.dt.is_year_end
+
+idx = pd.date_range("2017-12-30", periods=3)
+idx.is_year_end
+
+pandas.DatetimeIndex.is_leap_year
+----------------------------------
+idx = pd.date_range("2012-01-01", "2015-01-01", freq="YE")
+idx.is_leap_year
+
+dates_series = pd.Series(idx)
+dates_series.dt.is_leap_year
+
+
+pandas.DatetimeIndex.inferred_freq
+-----------------------------------
+idx = pd.DatetimeIndex(["2018-01-01", "2018-01-03", "2018-01-05"])
+idx.inferred_freq
+
+tdelta_idx = pd.to_timedelta(["0 days", "10 days", "20 days"])
+tdelta_idx.inferred_freq
+
+
+pandas.DatetimeIndex.normalize
+-----------------------------
+idx = pd.date_range(start='2014-08-01 10:00', freq='h',periods=3, tz='Asia/Calcutta')
+idx.normalize()
+
+pandas.DatetimeIndex.strftime
+-----------------------------
+rng = pd.date_range(pd.Timestamp("2018-03-10 09:00"),periods=3, freq='s')
+rng.strftime('%B %d, %Y, %r')
+
+pandas.DatetimeIndex.snap
+-------------------------
+idx = pd.DatetimeIndex(['2023-01-01', '2023-01-02','2023-02-01', '2023-02-02'])
+idx.snap('MS')
+
+pandas.DatetimeIndex.tz_convert
+-----------------------------
+dti = pd.date_range(start='2014-08-01 09:00',freq='h', periods=3, tz='Europe/Berlin')
+dti.tz_convert('US/Central')
+
+
+dti = pd.date_range(start='2014-08-01 09:00', freq='h',periods=3, tz='Europe/Berlin')
+dti.tz_convert(None)
+
+
+pandas.DatetimeIndex.tz_localize
+--------------------------------
+tz_naive = pd.date_range('2018-03-01 09:00', periods=3)
+tz_naive
+
+tz_aware = tz_naive.tz_localize(tz='US/Eastern')
+tz_aware
+
+tz_aware.tz_localize(None)
+
+
+pandas.DatetimeIndex.round
+---------------------------
+rng = pd.date_range('1/1/2018 11:59:00', periods=3, freq='min')
+rng.round('h')
+
+pd.Series(rng).dt.round("h")
+
+
+rng_tz = pd.DatetimeIndex(["2021-10-31 03:30:00"], tz="Europe/Amsterdam")
+rng_tz.floor("2h", ambiguous=False)
+
+rng_tz.floor("2h", ambiguous=True)
+
+
+pandas.DatetimeIndex.floor
+---------------------------
+rng = pd.date_range('1/1/2018 11:59:00', periods=3, freq='min')
+rng.floor('h')
+
+pd.Series(rng).dt.floor("h")
+rng_tz = pd.DatetimeIndex(["2021-10-31 03:30:00"], tz="Europe/Amsterdam")
+rng_tz.floor("2h", ambiguous=False)
+rng_tz.floor("2h", ambiguous=True)
+
+pandas.DatetimeIndex.ceil
+-------------------------
+rng = pd.date_range('1/1/2018 11:59:00', periods=3, freq='min')
+rng
+rng.ceil('h')
+pd.Series(rng).dt.ceil("h")
+
+rng_tz = pd.DatetimeIndex(["2021-10-31 01:30:00"], tz="Europe/Amsterdam")
+rng_tz.ceil("h", ambiguous=False)
+rng_tz.ceil("h", ambiguous=True)
+
+
+pandas.DatetimeIndex.to_period
+------------------------------
+df = pd.DataFrame({"y": [1, 2, 3]},index=pd.to_datetime(["2000-03-31 00:00:00","2000-05-31 00:00:00","2000-08-31 00:00:00"]))
+df.index.to_period("M")
+
+idx = pd.date_range("2017-01-01", periods=2)
+idx.to_period()
+
+pandas.DatetimeIndex.to_pydatetime
+----------------------------------
+idx = pd.date_range('2018-02-27', periods=3)
+idx.to_pydatetime()
+
+
+pandas.DatetimeIndex.to_series
+-------------------------------
+idx = pd.Index(['Ant', 'Bear', 'Cow'], name='animal')
+idx.to_series(index=[0, 1, 2])
+idx.to_series(name='zoo')
+
+pandas.DatetimeIndex.to_frame
+------------------------------
+idx = pd.Index(['Ant', 'Bear', 'Cow'], name='animal')
+idx.to_frame()
+
+
+idx.to_frame(index=False)
+animal
+	
+idx.to_frame(index=False, name='zoo')
+zoo
+
+pandas.DatetimeIndex.month_name
+-------------------------------
+s = pd.Series(pd.date_range(start='2018-01', freq='ME', periods=3))
+s.dt.month_name()
+
+
+idx = pd.date_range(start='2018-01', freq='ME', periods=3)
+idx.month_name()
+
+
+idx = pd.date_range(start='2018-01', freq='ME', periods=3)
+idx.month_name(locale='pt_BR.utf8')  
+
+pandas.DatetimeIndex.day_name
+------------------------------
+s = pd.Series(pd.date_range(start='2018-01-01', freq='D', periods=3))
+s.dt.day_name()
+
+idx = pd.date_range(start='2018-01-01', freq='D', periods=3)
+idx.day_name()
+
+idx = pd.date_range(start='2018-01-01', freq='D', periods=3)
+idx.day_name(locale='pt_BR.utf8') 
+
+pandas.DatetimeIndex.mean
+--------------------------
+idx = pd.date_range('2001-01-01 00:00', periods=3)
+idx.mean()
+
+tdelta_idx = pd.to_timedelta([1, 2, 3], unit='D')
+tdelta_idx.mean()
+
+pandas.DatetimeIndex.std
+------------------------
+idx = pd.date_range('2001-01-01 00:00', periods=3)
+
+idx.std()
+
+
+
+

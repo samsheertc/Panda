@@ -1,0 +1,637 @@
+pandas.Index.is_monotonic_increasing
+pandas.Index.is_monotonic_decreasing
+------------------------------------
+pd.Index([1, 2, 3]).is_monotonic_increasing #True
+pd.Index([1, 2, 2]).is_monotonic_increasing #False
+pd.Index([3, 2, 1]).is_monotonic_decreasing #True
+
+pandas.Index.is_unique
+-----------------------
+idx = pd.Index([1, 5, 8, 7])
+idx.is_unique
+
+
+pandas.Index.has_duplicates
+----------------------------
+idx = pd.Index([1, 5, 7, 7])
+idx.has_duplicates
+
+
+pandas.Index.hasnans
+---------------------
+Return True if there are any NaNs.
+
+s = pd.Series([1, 2, 3], index=['a', 'b', None])
+a       1
+b       2
+None    3
+dtype: int64
+
+s.index.hasnans #True
+
+pandas.Index.dtype
+-----------------
+idx = pd.Index([1, 2, 3])
+idx        #Index([1, 2, 3], dtype='int64')
+idx.dtype  #dtype('int64')
+
+
+pandas.Index.inferred_type
+--------------------------
+idx = pd.Index([1, 2, 3])
+idx
+idx.inferred_type #integer
+
+pandas.Index.shape
+------------------
+idx = pd.Index([1, 2, 3])
+idx.shape
+(3,)
+
+
+pandas.Index.name
+------------------
+idx = pd.Index([1, 2, 3], name='x')
+idx.name
+
+pandas.Index.nbytes
+--------------------
+Return the number of bytes in the underlying data.
+
+
+pandas.Index.ndim
+-----------------
+Number of dimensions of the underlying data, by definition 1.
+
+s = pd.Series(['Ant', 'Bear', 'Cow'])
+s.ndim
+
+idx = pd.Index([1, 2, 3])
+idx.ndim
+
+pandas.Index.size
+-----------------
+Return the number of elements in the underlying data.
+
+s.size    #3
+idx.size  #3
+
+pandas.Index.T
+-------------
+Return the transpose, which is by definition self.
+
+s = pd.Series(['Ant', 'Bear', 'Cow'])
+s
+s.T
+
+idx = pd.Index([1, 2, 3])
+idx.T
+
+pandas.Index.all
+pandas.Index.any
+-----------------
+Return whether all elements are Truthy.
+Return whether any element is Truthy.
+
+pd.Index([1, 2, 3]).all() #True
+pd.Index([0, 1, 2]).all() #False
+
+pd.Index([0, 1, 2]).any() #True
+pd.Index([0, 0, 0]).any() #False
+
+Not a Number (NaN), positive infinity and negative infinity evaluate to True because these are not equal to zero.
+
+
+pandas.Index.argmax
+pandas.Index.argmin
+--------------------
+Return int position of the largest value in the Series.
+Return int position of the smallest value in the Series.
+
+s = pd.Series({'Corn Flakes': 100.0, 'Almond Delight': 110.0,'Cinnamon Toast Crunch': 120.0, 'Cocoa Puff': 110.0})
+s.argmax() #2
+s.argmin() #0
+
+
+pandas.Index.copy
+-----------------
+Make a copy of this object.
+
+idx = pd.Index(['a', 'b', 'c'])
+new_idx = idx.copy()
+idx is new_idx   #False
+
+pandas.Index.delete
+-------------------
+Make new Index with passed location(-s) deleted.
+
+idx = pd.Index(['a', 'b', 'c'])
+idx.delete(1)  
+
+#['a', 'c']
+
+
+idx = pd.Index(['a', 'b', 'c'])
+idx.delete([0, 2])
+
+#['b']
+
+pandas.Index.drop
+-----------------
+Make new Index with passed list of labels deleted.
+
+idx = pd.Index(['a', 'b', 'c'])
+idx.drop(['a'])
+
+#['b', 'c']
+
+pandas.Index.drop_duplicates
+----------------------------
+Return Index with duplicate values removed.
+
+idx = pd.Index(['lama', 'cow', 'lama', 'beetle', 'lama', 'hippo'])
+idx.drop_duplicates(keep='first')   #Index(['lama', 'cow', 'beetle', 'hippo'], dtype='object')
+idx.drop_duplicates(keep='last')    #Index(['cow', 'beetle', 'lama', 'hippo'], dtype='object')
+idx.drop_duplicates(keep=False)     #Index(['cow', 'beetle', 'hippo'], dtype='object')
+
+
+pandas.Index.duplicated
+------------------------
+Indicate duplicate index values.
+
+idx = pd.Index(['lama', 'cow', 'lama', 'beetle', 'lama'])
+
+idx.duplicated()              #array([False, False,  True, False,  True])
+idx.duplicated(keep='first')  #array([False, False,  True, False,  True])
+idx.duplicated(keep='last')   #array([ True, False,  True, False, False])
+idx.duplicated(keep=False)    #array([ True, False,  True, False,  True])
+
+
+pandas.Index.equals
+--------------------
+Determine if two Index object are equal.
+
+
+idx1 = pd.Index([1, 2, 3])
+idx1.equals(pd.Index([1, 2, 3])) #True
+
+
+idx1 = pd.Index([1, 2, 3])
+idx2 = pd.Index(["1", "2", "3"])
+idx1.equals(idx2) #False
+
+pandas.Index.insert
+-------------------
+idx = pd.Index(['a', 'b', 'c']) 
+idx.insert(1, 'x') #Index(['a', 'x', 'b', 'c'], dtype='object')
+
+
+pandas.Index.max
+pandas.Index.min
+-----------------
+idx = pd.Index([3, 2, 1])
+idx.min() #1
+idx.max() #3
+
+
+idx = pd.Index(['c', 'b', 'a'])
+idx.min() #a
+idx.max() #c
+
+
+idx = pd.MultiIndex.from_product([('a', 'b'), (2, 1)])
+idx.min() #('a', 1)
+idx.max() #('b', 2)
+
+
+pandas.Index.reindex
+---------------------
+idx = pd.Index(['car', 'bike', 'train', 'tractor'])
+idx                          #Index(['car', 'bike', 'train', 'tractor'], dtype='object')
+idx.reindex(['car', 'bike']) #(Index(['car', 'bike'], dtype='object'), array([0, 1]))
+
+
+
+pandas.Index.rename
+-------------------
+Alter Index or MultiIndex name.
+
+idx = pd.Index(['A', 'C', 'A', 'B'], name='score')
+idx.rename('grade')    #Index(['A', 'C', 'A', 'B'], dtype='object', name='grade')
+
+idx = pd.MultiIndex.from_product([['python', 'cobra'],[2018, 2019]],names=['kind', 'year'])
+idx.rename(['species', 'year'])
+idx.rename('species') #Error
+
+
+pandas.Index.repeat
+-------------------
+Repeat elements of a Index.
+
+idx = pd.Index(['a', 'b', 'c'])
+idx.repeat(2)          #Index(['a', 'a', 'b', 'b', 'c', 'c'], dtype='object')
+idx.repeat([1, 2, 3])  #Index(['a', 'b', 'b', 'c', 'c', 'c'], dtype='object')
+
+pandas.Index.where
+-------------------
+Replace values where the condition is False.
+
+idx = pd.Index(['car', 'bike', 'train', 'tractor'])
+idx
+idx.where(idx.isin(['car', 'train']), 'other')  #Index(['car', 'other', 'train', 'other'], dtype='object')
+
+pandas.Index.take
+------------------
+Return a new Index of the values selected by the indices.
+
+idx = pd.Index(['a', 'b', 'c'])
+idx.take([2, 2, 1, 2])           #Index(['c', 'c', 'b', 'c'], dtype='object')
+
+pandas.Index.putmask
+--------------------
+Return a new Index of the values set with the mask.
+
+
+idx1 = pd.Index([1, 2, 3])
+idx2 = pd.Index([5, 6, 7])
+idx1.putmask([True, False, False], idx2) #Index([5, 2, 3], dtype='int64')
+idx1.putmask([True, True, True], idx2) #Index([5, 6, 7], dtype='int64')
+idx1.putmask([False, False, False], idx2) #Index([1, 2, 3], dtype='int64')
+
+
+pandas.Index.unique
+-----------------
+Return unique values in the index.
+
+
+idx = pd.Index([1, 1, 2, 3, 3])
+idx.unique()
+Index([1, 2, 3], dtype='int64')
+
+
+pandas.Index.nunique
+-----------------
+Return number of unique elements in the object.
+
+
+s = pd.Series([1, 3, 5, 7, 7])
+s.nunique() #4
+
+idx = pd.Index([1, 1, 2, 3, 3])
+idx.nunique() #3
+
+pandas.Index.value_counts
+-------------------------
+Return a Series containing counts of unique values.
+
+
+
+pandas.Index.set_names
+pandas.Index.droplevel
+pandas.Index.fillna
+pandas.Index.dropna
+pandas.Index.isna
+pandas.Index.notna
+pandas.Index.astype
+pandas.Index.item
+pandas.Index.map
+pandas.Index.ravel
+pandas.Index.to_list
+
+pandas.Index.to_series
+------------------------
+Create a Series with both index and values equal to the index keys.
+
+
+idx = pd.Index(['Ant', 'Bear', 'Cow'], name='animal')
+idx.to_series()
+animal
+Ant      Ant
+Bear    Bear
+Cow      Cow
+Name: animal, dtype: object
+
+
+
+idx.to_series(index=[0, 1, 2])
+0     Ant
+1    Bear
+2     Cow
+Name: animal, dtype: object
+
+idx.to_series(name='zoo')
+animal
+Ant      Ant
+Bear    Bear
+Cow      Cow
+Name: zoo, dtype: object
+
+
+pandas.Index.to_frame
+----------------------
+Create a DataFrame with a column containing the Index.
+
+idx = pd.Index(['Ant', 'Bear', 'Cow'], name='animal')
+idx.to_frame()
+idx.to_frame(index=False)
+idx.to_frame(index=False, name='zoo')
+
+
+
+pandas.Index.view
+pandas.Index.argsort
+pandas.Index.searchsorted
+pandas.Index.sort_values
+pandas.Index.shift
+
+pandas.Index.append
+--------------------
+idx = pd.Index([1, 2, 3])
+idx.append(pd.Index([4]))
+
+pandas.Index.join
+-----------------
+idx1 = pd.Index([1, 2, 3])
+idx2 = pd.Index([4, 5, 6])
+idx1.join(idx2, how='outer')
+
+o/p
+Index([1, 2, 3, 4, 5, 6], dtype='int64')
+
+
+pandas.Index.intersection
+------------------------
+idx1 = pd.Index([1, 2, 3, 4])
+idx2 = pd.Index([3, 4, 5, 6])
+idx1.intersection(idx2)
+
+o/p
+Index([3, 4], dtype='int64')
+
+
+pandas.Index.union
+------------------
+idx1 = pd.Index([1, 2, 3, 4])
+idx2 = pd.Index([3, 4, 5, 6])
+idx1.union(idx2)
+#Index([1, 2, 3, 4, 5, 6], dtype='int64')
+
+
+idx1 = pd.Index(['a', 'b', 'c', 'd'])
+idx2 = pd.Index([1, 2, 3, 4])
+idx1.union(idx2)
+#Index(['a', 'b', 'c', 'd', 1, 2, 3, 4], dtype='object')
+
+
+idx1 = pd.MultiIndex.from_arrays([[1, 1, 2, 2], ["Red", "Blue", "Red", "Blue"]])
+idx2 = pd.MultiIndex.from_arrays([[3, 3, 2, 2], ["Red", "Green", "Red", "Green"]])
+idx1.union(idx2)
+idx1.union(idx2, sort=False)
+
+
+
+		   
+pandas.Index.difference
+-----------------------
+Return a new Index with elements of index not in other.
+
+idx1 = pd.Index([2, 1, 3, 4])
+idx2 = pd.Index([3, 4, 5, 6])
+idx1.difference(idx2)
+idx1.difference(idx2, sort=False)
+
+
+pandas.Index.symmetric_difference
+--------------------------------
+Compute the symmetric difference of two Index objects.
+
+idx1 = pd.Index([1, 2, 3, 4])
+idx2 = pd.Index([2, 3, 4, 5])
+idx1.symmetric_difference(idx2)
+
+o/p
+Index([1, 5], dtype='int64')
+
+
+pandas.Index.asof
+-----------------
+Return the label from the index, or, if not present, the previous one.
+
+Assuming that the index is sorted, return the passed index label if it is in the index, 
+or return the previous index label if the passed one is not in the index.
+
+idx = pd.Index(['2013-12-31', '2014-01-02', '2014-01-03'])
+idx.asof('2014-01-01')
+idx.asof('2014-01-02')
+idx.asof('1999-01-02')
+
+pandas.Index.asof_locs
+-----------------------
+Return the locations (indices) of labels in the index.
+
+
+-----------------------------------------
+pandas.Index.get_indexer
+pandas.Index.get_indexer_for
+pandas.Index.get_indexer_non_unique
+pandas.Index.get_level_values
+pandas.Index.get_loc
+pandas.Index.get_slice_bound
+pandas.Index.isin
+pandas.Index.slice_indexer
+pandas.Index.slice_locs
+-----------------------------------------
+pandas.RangeIndex
+pandas.RangeIndex.start
+pandas.RangeIndex.stop
+pandas.RangeIndex.step
+pandas.RangeIndex.from_range
+-----------------------------------------
+pandas.CategoricalIndex
+pandas.CategoricalIndex.codes
+pandas.CategoricalIndex.categories
+pandas.CategoricalIndex.ordered
+pandas.CategoricalIndex.rename_categories
+pandas.CategoricalIndex.reorder_categories
+pandas.CategoricalIndex.add_categories
+pandas.CategoricalIndex.remove_categories
+pandas.CategoricalIndex.remove_unused_categories
+pandas.CategoricalIndex.set_categories
+pandas.CategoricalIndex.as_ordered
+pandas.CategoricalIndex.as_unordered
+pandas.CategoricalIndex.map
+pandas.CategoricalIndex.equals
+-----------------------------------------
+pandas.IntervalIndex
+pandas.IntervalIndex.from_arrays
+pandas.IntervalIndex.from_tuples
+pandas.IntervalIndex.from_breaks
+pandas.IntervalIndex.left
+pandas.IntervalIndex.right
+pandas.IntervalIndex.mid
+pandas.IntervalIndex.closed
+pandas.IntervalIndex.length
+pandas.IntervalIndex.values
+pandas.IntervalIndex.is_empty
+pandas.IntervalIndex.is_non_overlapping_monotonic
+pandas.IntervalIndex.is_overlapping
+pandas.IntervalIndex.get_loc
+pandas.IntervalIndex.get_indexer
+pandas.IntervalIndex.set_closed
+pandas.IntervalIndex.contains
+pandas.IntervalIndex.overlaps
+pandas.IntervalIndex.to_tuples
+-----------------------------------------
+pandas.MultiIndex
+pandas.MultiIndex.from_arrays
+pandas.MultiIndex.from_tuples
+pandas.MultiIndex.from_product
+pandas.MultiIndex.from_frame
+pandas.MultiIndex.names
+pandas.MultiIndex.levels
+pandas.MultiIndex.codes
+pandas.MultiIndex.nlevels
+pandas.MultiIndex.levshape
+pandas.MultiIndex.dtypes
+pandas.MultiIndex.set_levels
+pandas.MultiIndex.set_codes
+pandas.MultiIndex.to_flat_index
+pandas.MultiIndex.to_frame
+pandas.MultiIndex.sortlevel
+pandas.MultiIndex.droplevel
+pandas.MultiIndex.swaplevel
+pandas.MultiIndex.reorder_levels
+pandas.MultiIndex.remove_unused_levels
+pandas.MultiIndex.drop
+pandas.MultiIndex.copy
+pandas.MultiIndex.append
+pandas.MultiIndex.truncate
+pandas.MultiIndex.get_loc
+pandas.MultiIndex.get_locs
+pandas.MultiIndex.get_loc_level
+pandas.MultiIndex.get_indexer
+pandas.MultiIndex.get_level_values
+-----------------------------------------
+pandas.IndexSlice
+-----------------------------------------
+pandas.DatetimeIndex
+pandas.DatetimeIndex.year
+pandas.DatetimeIndex.month
+pandas.DatetimeIndex.day
+pandas.DatetimeIndex.hour
+pandas.DatetimeIndex.minute
+pandas.DatetimeIndex.second
+pandas.DatetimeIndex.microsecond
+pandas.DatetimeIndex.nanosecond
+pandas.DatetimeIndex.date
+pandas.DatetimeIndex.time
+pandas.DatetimeIndex.timetz
+pandas.DatetimeIndex.dayofyear
+pandas.DatetimeIndex.day_of_year
+pandas.DatetimeIndex.dayofweek
+pandas.DatetimeIndex.day_of_week
+pandas.DatetimeIndex.weekday
+pandas.DatetimeIndex.quarter
+pandas.DatetimeIndex.tz
+pandas.DatetimeIndex.freq
+pandas.DatetimeIndex.freqstr
+pandas.DatetimeIndex.is_month_start
+pandas.DatetimeIndex.is_month_end
+pandas.DatetimeIndex.is_quarter_start
+pandas.DatetimeIndex.is_quarter_end
+pandas.DatetimeIndex.is_year_start
+pandas.DatetimeIndex.is_year_end
+pandas.DatetimeIndex.is_leap_year
+pandas.DatetimeIndex.inferred_freq
+pandas.DatetimeIndex.indexer_at_time
+pandas.DatetimeIndex.indexer_between_time
+pandas.DatetimeIndex.normalize
+pandas.DatetimeIndex.strftime
+pandas.DatetimeIndex.snap
+pandas.DatetimeIndex.tz_convert
+pandas.DatetimeIndex.tz_localize
+pandas.DatetimeIndex.round
+pandas.DatetimeIndex.floor
+pandas.DatetimeIndex.ceil
+pandas.DatetimeIndex.month_name
+pandas.DatetimeIndex.day_name
+pandas.DatetimeIndex.as_unit
+pandas.DatetimeIndex.to_period
+pandas.DatetimeIndex.to_pydatetime
+pandas.DatetimeIndex.to_series
+pandas.DatetimeIndex.to_frame
+pandas.DatetimeIndex.mean
+pandas.DatetimeIndex.std
+----------------------------------
+pandas.TimedeltaIndex
+pandas.TimedeltaIndex.days
+pandas.TimedeltaIndex.seconds
+pandas.TimedeltaIndex.microseconds
+pandas.TimedeltaIndex.nanoseconds
+pandas.TimedeltaIndex.components
+pandas.TimedeltaIndex.inferred_freq
+pandas.TimedeltaIndex.as_unit
+pandas.TimedeltaIndex.to_pytimedelta
+pandas.TimedeltaIndex.to_series
+pandas.TimedeltaIndex.round
+pandas.TimedeltaIndex.floor
+pandas.TimedeltaIndex.ceil
+pandas.TimedeltaIndex.to_frame
+pandas.TimedeltaIndex.mean
+-----------------------------------------
+pandas.PeriodIndex
+
+pandas.PeriodIndex.day
+idx = pd.PeriodIndex(["2023-01-01", "2023-01-02", "2023-01-03"], freq="D")
+idx.weekday
+
+pandas.PeriodIndex.dayofweek
+idx = pd.PeriodIndex(["2023-01-01", "2023-01-02", "2023-01-03"], freq="D")
+idx.weekday
+
+pandas.PeriodIndex.day_of_week
+idx = pd.PeriodIndex(["2023-01-01", "2023-01-02", "2023-01-03"], freq="D")
+idx.weekday
+
+pandas.PeriodIndex.dayofyear
+pandas.PeriodIndex.day_of_year
+idx = pd.PeriodIndex(["2023-01-10", "2023-02-01", "2023-03-01"], freq="D")
+idx.dayofyear
+
+idx = pd.PeriodIndex(["2023", "2024", "2025"], freq="Y")
+idx
+idx.dayofyear
+
+
+
+
+pandas.PeriodIndex.days_in_month
+pandas.PeriodIndex.daysinmonth
+period = pd.period_range('2020-1-1 00:00', '2020-3-1 00:00', freq='M')
+s = pd.Series(period)
+s.dt.days_in_month
+
+idx = pd.PeriodIndex(["2023-01", "2023-02", "2023-03"], freq="M")
+idx.days_in_month   # It can be also entered as `daysinmonth`
+
+pandas.PeriodIndex.end_time
+pandas.PeriodIndex.freq
+pandas.PeriodIndex.freqstr
+pandas.PeriodIndex.hour
+pandas.PeriodIndex.is_leap_year
+pandas.PeriodIndex.minute
+pandas.PeriodIndex.month
+pandas.PeriodIndex.quarter
+pandas.PeriodIndex.qyear
+pandas.PeriodIndex.second
+pandas.PeriodIndex.start_time
+pandas.PeriodIndex.week
+pandas.PeriodIndex.weekday
+pandas.PeriodIndex.weekofyear
+pandas.PeriodIndex.year
+pandas.PeriodIndex.asfreq
+pandas.PeriodIndex.strftime
+pandas.PeriodIndex.to_timestamp
+pandas.PeriodIndex.from_fields
+pandas.PeriodIndex.from_ordinals
+-----------------------------------------

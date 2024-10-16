@@ -1,0 +1,47 @@
+pandas.MultiIndex.from_arrays
+----------------------------
+arrays = [[1, 1, 2, 2], ['red', 'blue', 'red', 'blue']]
+pd.MultiIndex.from_arrays(arrays, names=('number', 'color'))
+
+MultiIndex([(1,  'red'),
+            (1, 'blue'),
+            (2,  'red'),
+            (2, 'blue')],
+           names=['number', 'color'])
+		   
+pandas.MultiIndex.from_frame
+-----------------------------
+df = pd.DataFrame([['HI', 'Temp'], ['HI', 'Precip'],['NJ', 'Temp'], ['NJ', 'Precip']],columns=['a', 'b'])
+pd.MultiIndex.from_frame(df)
+pd.MultiIndex.from_frame(df, names=['state', 'observation'])
+
+MultiIndex([('HI',   'Temp'),
+            ('HI', 'Precip'),
+            ('NJ',   'Temp'),
+            ('NJ', 'Precip')],
+           names=['state', 'observation'])
+		   
+pandas.MultiIndex.from_product
+----------------------------
+numbers = [0, 1, 2]
+colors = ['green', 'purple']
+pd.MultiIndex.from_product([numbers, colors],names=['number', 'color'])
+
+MultiIndex([(0,  'green'),
+            (0, 'purple'),
+            (1,  'green'),
+            (1, 'purple'),
+            (2,  'green'),
+            (2, 'purple')],
+           names=['number', 'color'])
+		   
+pandas.MultiIndex.from_tuples
+-----------------------------
+tuples = [(1, 'red'), (1, 'blue'),(2, 'red'), (2, 'blue')]
+pd.MultiIndex.from_tuples(tuples, names=('number', 'color'))
+
+MultiIndex([(1,  'red'),
+            (1, 'blue'),
+            (2,  'red'),
+            (2, 'blue')],
+           names=['number', 'color'])

@@ -1,0 +1,90 @@
+pandas.melt
+pandas.pivot
+pandas.pivot_table
+pandas.crosstab
+pandas.cut
+pandas.qcut
+pandas.merge
+pandas.merge_ordered
+pandas.merge_asof
+pandas.concat
+pandas.get_dummies
+pandas.from_dummies
+pandas.factorize
+pandas.unique
+pandas.lreshape
+pandas.wide_to_long
+pandas.isna
+pandas.isnull
+pandas.notna
+pandas.notnull
+pandas.to_numeric
+pandas.to_datetime  ****
+pandas.to_timedelta
+pandas.date_range   ****
+pandas.bdate_range
+pandas.period_range
+pandas.timedelta_range
+pandas.infer_freq
+pandas.interval_range
+pandas.eval
+pandas.tseries.api.guess_datetime_format
+pandas.util.hash_array
+pandas.util.hash_pandas_object
+pandas.api.interchange.from_dataframe
+
+pandas.merge
+------------
+pandas.merge(left, right, how='inner', on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=('_x', '_y'), copy=None, indicator=False, validate=None)[source]
+
+df1 = pd.DataFrame({'lkey': ['foo', 'bar', 'baz', 'foo'],'value': [1, 2, 3, 5]})
+df2 = pd.DataFrame({'rkey': ['foo', 'bar', 'baz', 'foo'],'value': [5, 6, 7, 8]})
+df1.merge(df2, left_on='lkey', right_on='rkey')
+df1.merge(df2, left_on='lkey', right_on='rkey',suffixes=('_left', '_right'))
+
+
+df1 = pd.DataFrame({'a': ['foo', 'bar'], 'b': [1, 2]})
+df2 = pd.DataFrame({'a': ['foo', 'baz'], 'c': [3, 4]})
+df1.merge(df2, how='inner', on='a')
+
+df1 = pd.DataFrame({'left': ['foo', 'bar']})
+df2 = pd.DataFrame({'right': [7, 8]})
+df1.merge(df2, how='cross')
+
+
+
+pandas.concat
+--------------
+pandas.concat(objs, *, axis=0, join='outer', ignore_index=False, keys=None, levels=None, names=None, verify_integrity=False, sort=False, copy=None)
+
+s1 = pd.Series(['a', 'b'])
+s2 = pd.Series(['c', 'd'])
+pd.concat([s1, s2])
+pd.concat([s1, s2], ignore_index=True)
+pd.concat([s1, s2], keys=['s1', 's2'])
+pd.concat([s1, s2], keys=['s1', 's2'],names=['Series name', 'Row ID'])
+
+
+df1 = pd.DataFrame([['a', 1], ['b', 2]],columns=['letter', 'number'])
+df2 = pd.DataFrame([['c', 3], ['d', 4]],columns=['letter', 'number'])
+df3 = pd.DataFrame([['c', 3, 'cat'], ['d', 4, 'dog']],columns=['letter', 'number', 'animal'])
+df4 = pd.DataFrame([['bird', 'polly'], ['monkey', 'george']],columns=['animal', 'name'])
+df5 = pd.DataFrame([1], index=['a'])
+df6 = pd.DataFrame([2], index=['a'])
+df7 = pd.DataFrame({'a': 1, 'b': 2}, index=[0])
+new_row = pd.Series({'a': 3, 'b': 4})
+
+
+pd.concat([df1, df2])
+pd.concat([df1, df3], sort=False)
+pd.concat([df1, df3], join="inner")
+pd.concat([df1, df4], axis=1)
+pd.concat([df5, df6], verify_integrity=True)
+pd.concat([df7, new_row.to_frame().T], ignore_index=True)
+
+
+
+d = {'a': 1, 'b': 2, 'c': 3}
+idx = pd.date_range(start='2017-01-01', end='2017-01-03')
+ser = pd.Series(data=d, index=idx, name='Name')
+
