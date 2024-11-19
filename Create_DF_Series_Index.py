@@ -1,19 +1,12 @@
 DataFrame
 ---------
+d1 = { 'Col1' : ['key1_v1', 'key1_v2','key1_v3'],'Col2' : ['key2_v1', 'key2_v2','key2_v3'],'Col3' : ['key3_v1', 'key3_v2','key3_v3'],}
+d2 = [[1,2,3],[11,12,13],[21,22,23]]
+d3 = [(1,2,3),(11,12,13),(21,22,23)]
+d4 = ([1,2,3],[11,12,13],[21,22,23])
+d5 = ((1,2,3),(11,12,13),(21,22,23))
 idx=[1,2,3]
 col=['Col1', 'Col2', 'Col3']
-
-d1 = { 
-    'Col1' : ['key1_v1', 'key1_v2','key1_v3'],
-    'Col2' : ['key2_v1', 'key2_v2','key2_v3'],
-    'Col3' : ['key3_v1', 'key3_v2','key3_v3'],
-}
-
-d2=[[1,2,3],[11,12,13],[21,22,23]]
-d3=[(1,2,3),(11,12,13),(21,22,23)]
-d4=([1,2,3],[11,12,13],[21,22,23])
-d5=((1,2,3),(11,12,13),(21,22,23))
-
 pd.DataFrame(data=d1,index=idx,columns=col)
 
 
@@ -24,6 +17,10 @@ d1 = [1,2,3]
 d2 = (1,2,3)
 pd.Series(data=d1,index=idx,name='Items',dtype='float64')
 pd.Series(data=d1,index=idx,name='Items',dtype='int64')
+
+
+idx = {'idx1': 100.0, 'idx2': 110.0, 'idx3': 120.0, 'idx4': 110.0}
+pd.Series(idx)
 
 
 MultiIndex

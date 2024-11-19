@@ -1,0 +1,94 @@
+RangeIndex
+-----------
+pd.RangeIndex(start, end, step)
+pd.RangeIndex(2, -10, -3)
+
+DatetimeIndex
+-------------
+pd.DatetimeIndex(data=None, freq=<no_default>, tz=<no_default>, normalize=<no_default>, closed=<no_default>, ambiguous='raise', dayfirst=False, yearfirst=False, dtype=None, copy=False, name=None)
+
+pd.DatetimeIndex([List of Date], freq="D")
+pd.DatetimeIndex(["2018-01-01", "2018-01-03", "2018-01-05"], freq="infer")
+
+
+
+PeriodIndex
+---------------
+pd.PeriodIndex(data=None, ordinal=None, freq=None, dtype=None, copy=False, name=None, **fields)
+
+pd.PeriodIndex([list of Date] , freq="D")
+idx = pd.PeriodIndex(["2023-01", "2023-02", "2023-03"], freq="M")
+
+
+
+General functions
+-------------------
+pd.Period(date,'D/M/Y')
+
+
+timedelta_range
+------------------
+pd.timedelta_range(start=None, end=None, periods=None, freq=None, name=None, closed=None, *, unit=None)
+start   : str or timedelta-like, default None
+end     : str or timedelta-like, default None
+periods : int, default None
+freq    : str, Timedelta, datetime.timedelta, or DateOffset, default ‘D’
+name    : str, default None
+closed  : str, default None [Make the interval closed with respect to the given frequency to the ‘left’, ‘right’, or both sides (None)] 
+unit    : str, default None
+
+pd.timedelta_range(start='1 day', periods=4)
+pd.timedelta_range(start='1 day', periods=4, closed='right')
+pd.timedelta_range(start='1 day', end='2 days', freq='6h')
+pd.timedelta_range(start='1 day', end='5 days', periods=4)
+
+
+date_range
+-------------
+pd.date_range(start=None, end=None, periods=None, freq=None, tz=None, normalize=False, name=None, inclusive='both', *, unit=None, **kwargs)
+pd.date_range(pd.Timestamp("2018-03-10 09:00"), periods=3, freq='s')
+
+Alias	Description
+-----   ------------
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='B')	    #business day frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='C')	    #custom business day frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='D')	    #calendar day frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='W')	    #weekly frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='ME')	    #month end frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='SME')	    #semi-month end frequency (15th and end of month)
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='BME')     #business month end frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='CBME')    #custom business month end frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='MS')	    #month start frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='SMS')	    #semi-month start frequency (1st and 15th)
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='BMS')	    #business month start frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='CBMS')    #custom business month start frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='QE')	    #quarter end frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='BQE')	    #business quarter end frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='QS')	    #quarter start frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='BQS')	    #business quarter start frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='YE')	    #year end frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='BYE')	    #business year end frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='YS')	    #year start frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='BYS')	    #business year start frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='h')	    #hourly frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='bh')	    #business hour frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='cbh')	    #custom business hour frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='min')	    #minutely frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='s')	    #secondly frequency
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='ms')	    #milliseconds
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='us')	    #microseconds
+pd.date_range(pd.Timestamp("2024-01-01 09:00"), periods=10, freq='ns')	    #nanoseconds
+
+period_range
+---------------
+pd.period_range(start=None, end=None, periods=None, freq=None, name=None)
+
+start   : str, datetime, date, pandas.Timestamp, or period-like, default None
+end     : str, datetime, date, pandas.Timestamp, or period-like, default None
+periods : int, default None
+freq    : str or DateOffset, optional
+name    : str, default None
+
+pd.period_range(start='2017-01-01', end='2018-01-01', freq='M')
+
+pd.period_range(start=pd.Period('2017Q1', freq='Q'),end=pd.Period('2017Q2', freq='Q'), freq='M')
